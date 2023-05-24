@@ -9,7 +9,7 @@ class AddressInfo extends Equatable {
   final String email;
   final String phone;
   final String address;
-  final String type;
+  final int type;
   final int countryId;
   final int stateId;
   final int cityId;
@@ -42,7 +42,7 @@ class AddressInfo extends Equatable {
     String? email,
     String? phone,
     String? address,
-    String? type,
+    int? type,
     int? countryId,
     int? stateId,
     int? cityId,
@@ -98,7 +98,7 @@ class AddressInfo extends Equatable {
       email: map['email'] ?? '',
       phone: map['phone'] ?? '',
       address: map['address'] ?? '',
-      type: map['type'] ?? '',
+      type: map['type'] != null ? int.parse(map['type'].toString()) : 0,
       countryId: map['country_id'] != null
           ? int.parse(map['country_id'].toString())
           : 0,

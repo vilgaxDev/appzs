@@ -1,13 +1,14 @@
+import '/widgets/action_dialog.dart';
+
+import '/modules/profile/controllers/updated_info/updated_info_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '/modules/profile/controllers/updated_info/updated_info_cubit.dart';
 import '/utils/language_string.dart';
-import '/utils/utils.dart';
-import '/widgets/action_dialog.dart';
 import '/widgets/capitalized_word.dart';
+import '/utils/utils.dart';
+
 import '../../core/remote_urls.dart';
 import '../../core/router_name.dart';
 import '../../utils/constants.dart';
@@ -72,6 +73,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 return const SizedBox();
               },
             ),
+            // Container(
+            //   color: Colors.green,
+            // ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 12)),
           _buildProfileOptions(context),
@@ -145,12 +149,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               iconPath: Kimages.profileContactIcon,
             ),
             ElementTile(
-              title: Language.becomeSeller,
-              press: () =>
-                  Navigator.pushNamed(context, RouteNames.becomeSellerScreen),
-              iconPath: Kimages.becomeSellerIcon,
-            ),
-            ElementTile(
               title: Language.appInfo.capitalizeByWord(),
               press: () {
                 Utils.appInfoDialog(context);
@@ -198,6 +196,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               ),
             ),
+
+            // BlocListener<LoginBloc, LoginModelState>(
+            //   listener: (context, state) {
+            //     final logout = loginBloc.state;
+            //     if (logout is LoginStateLogOutLoading) {
+            //       Utils.loadingDialog(context);
+            //     } else {
+            //       Utils.closeDialog(context);
+            //       if (logout is LoginStateLogOut) {
+            //         final logout = loginBloc.state as LoginStateLogOut;
+            //         Utils.showSnackBar(context, logout.msg);
+            //       }
+            //       if (logout is LoginStateLogOut) {
+            //         Navigator.pushNamedAndRemoveUntil(context,
+            //             RouteNames.authenticationScreen, (route) => false);
+            //       }
+            //     }
+            //   },
+            //   child: ElementTile(
+            //     title: Language.logout.capitalizeByWord(),
+            //     press: () {
+            //       // loginBloc.add(const LoginEventLogout());
+            //
+            //       showDialog(
+            //         context: context,
+            //         builder: (context) => ActionDialog(
+            //           title: "${Language.areYouSureYouWantToLogOut}?",
+            //           image: Kimages.logout,
+            //           deleteText: Language.logout,
+            //           textColor: primaryColor,
+            //           onTap: () {
+            //             loginBloc.add(const LoginEventLogout());
+            //
+            //             // Navigator.pushReplacementNamed(
+            //             //     context, RouteNames.authenticationScreen);
+            //           },
+            //         ),
+            //       );
+            //     },
+            //     iconPath: Kimages.profileLogOutIcon,
+            //   ),
+            // ),
+
             BlocBuilder<LoginBloc, LoginModelState>(
               buildWhen: (previous, current) => previous.state != current.state,
               builder: (context, state) {
@@ -218,12 +259,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         textColor: primaryColor,
                         onTap: () {
                           loginBloc.add(const LoginEventLogout());
-                          Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              RouteNames.authenticationScreen,
-                              (route) => false);
-                          // Navigator.pushReplacementNamed(
-                          //     context, RouteNames.authenticationScreen);
+                          Navigator.pushReplacementNamed(
+                              context, RouteNames.authenticationScreen);
                         },
                       ),
                     );
@@ -231,6 +268,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   iconPath: Kimages.profileLogOutIcon,
                 );
               },
+            ),
+            ElementTile(
+              title: "Sign Out",
+              press: () {
+                Navigator.pushReplacementNamed(
+                    context, RouteNames.authenticationScreen);
+              },
+              iconPath: Kimages.profileLogOutIcon,
             ),
           ],
         ),

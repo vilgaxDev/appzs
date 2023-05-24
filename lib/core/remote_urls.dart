@@ -1,5 +1,6 @@
 class RemoteUrls {
-  static const String rootUrl = "https://mamunuiux.com/shopo/";
+  static const String rootUrl = "https://api.websolutionus.com/shopo/";
+
   static const String baseUrl = '${rootUrl}api/';
   static const String homeUrl = baseUrl;
   static const String userRegister = '${baseUrl}store-register';
@@ -22,21 +23,16 @@ class RemoteUrls {
   static String updateProfile(String token) =>
       '${baseUrl}user/update-profile?token=$token';
 
-  static String becomeSellerRequest(String token) =>
-      '${baseUrl}user/seller-request?token=$token';
-
   static String changePassword(String token) =>
       '${baseUrl}user/update-password?token=$token';
 
   static String countryListUrl(String token) =>
       '${baseUrl}user/address/create?token=$token';
-
   static String editAddress(String id, String token) =>
       '${baseUrl}user/address/$id/edit?token=$token';
 
   static String stateByCountryId(String countryId, String token) =>
       '${baseUrl}user/state-by-country/$countryId?token=$token';
-
   static String sellerDetailsUrl(String slug) => '${baseUrl}sellers/$slug';
 
   static String citiesByStateId(String stateId, String token) =>
@@ -49,7 +45,6 @@ class RemoteUrls {
 
   static String allChartUrl(String token) =>
       '${baseUrl}user/message-with-seller?token=$token';
-
   static String sendMsgToSeller(String token) =>
       '${baseUrl}user/send-message-to-seller?token=$token';
 
@@ -152,14 +147,12 @@ class RemoteUrls {
     String params,
   ) =>
       "${rootUrl}user/checkout/pay-with-mollie?token=$token&$params";
-
   // myfatoorah-webview?token=eeer&others_params
   static String payWithMyFatooraheWeb(
     String token,
     String params,
   ) =>
       "${rootUrl}user/checkout/myfatoorah-webview?token=$token&$params";
-
   // https://ztatgo.net/api/?
   static String payWithInstaMojoWeb(
     String token,
@@ -172,7 +165,6 @@ class RemoteUrls {
     String params,
   ) =>
       "${rootUrl}user/checkout/paystack-web-view?token=$token&$params";
-
   static String payWithSslCommerz(
     String token,
     String params,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_o/modules/message/chat/chat_screen.dart';
 import 'package:shop_o/modules/place_order/myfatoorah_payment_screen.dart';
-import 'package:shop_o/modules/seller/become_seller_screen.dart';
 import 'package:shop_o/modules/setting/edit_address.dart';
-
+import '../modules/message/chat_list/chat_list_screen.dart';
 import '/modules/category/all_seller_list.dart';
 import '/modules/category/banner_products.dart';
 import '/modules/category/sub_category_products.dart';
@@ -15,6 +14,7 @@ import '/modules/place_order/paystack_payment_screen.dart';
 import '/modules/place_order/sslcommerce.dart';
 import '/modules/seller/seller_screen.dart';
 import '/widgets/maintain_screen.dart';
+
 import '../modules/animated_splash_screen/animated_splash_screen.dart';
 import '../modules/authentication/authentication_screen.dart';
 import '../modules/authentication/forgot_screen.dart';
@@ -32,7 +32,6 @@ import '../modules/home/home_screen.dart';
 import '../modules/home/model/home_seller_model.dart';
 import '../modules/home/model/product_model.dart';
 import '../modules/main_page/main_page.dart';
-import '../modules/message/chat_list/chat_list_screen.dart';
 import '../modules/notification/notigication_screen.dart';
 import '../modules/onboarding/onboarding_screen.dart';
 import '../modules/order/model/product_order_model.dart';
@@ -121,7 +120,6 @@ class RouteNames {
   static const String sellerScreen = '/sellerScreen';
   static const String maintainScreen = '/maintainScreen';
   static const String chatScreen = '/chatScreen';
-  static const String becomeSellerScreen = '/becomeSellerScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -191,17 +189,11 @@ class RouteNames {
           settings: settings,
           builder: (_) => BrandProductScreen(slug: slug),
         );
-      case RouteNames.chatScreen:
+        case RouteNames.chatScreen:
         // final slug = settings.arguments as String;
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const ChatScreen(),
-        );
-
-      case RouteNames.becomeSellerScreen:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const BecomeSellerScreen(),
         );
 
       case RouteNames.subCategoryProductScreen:
@@ -268,8 +260,8 @@ class RouteNames {
         return MaterialPageRoute(
             settings: settings, builder: (_) => const AddAddressScreen());
 
-      case RouteNames.editAddressScreen:
-        final map = settings.arguments as Map<String, dynamic>;
+        case RouteNames.editAddressScreen:
+        final map = settings.arguments as Map<String,dynamic>;
         return MaterialPageRoute(
             settings: settings, builder: (_) => EditAddressScreen(map: map));
 
@@ -304,7 +296,7 @@ class RouteNames {
         );
 
       case RouteNames.placeOrderScreen:
-        final shippingMethod = settings.arguments as Map<String, dynamic>;
+        final shippingMethod = settings.arguments as Map<String,dynamic>;
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => PlaceOrderScreen(body: shippingMethod),

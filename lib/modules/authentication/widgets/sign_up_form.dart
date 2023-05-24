@@ -9,6 +9,7 @@ import '../../../utils/language_string.dart';
 import '../../../utils/utils.dart';
 import '../../animated_splash_screen/controller/app_setting_cubit/app_setting_cubit.dart';
 import '../controller/sign_up/sign_up_bloc.dart';
+import 'guest_button.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -25,7 +26,6 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     final bloc = context.read<SignUpBloc>();
     final appSettingBloc = context.read<AppSettingCubit>();
-    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
@@ -215,9 +215,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 );
               },
             ),
-            // const SizedBox(height: 28),
-            // const GuestButton(),
-            SizedBox(height: size.height * 0.2),
+            const SizedBox(height: 16),
+            const SizedBox(height: 28),
+            const GuestButton(),
           ],
         ),
       ),

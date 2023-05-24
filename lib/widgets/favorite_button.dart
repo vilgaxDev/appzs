@@ -55,6 +55,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         listener: (context, state) {
       if (state is WishListStateLoading) {
         //Utils.loadingDialog(context);
+
       } else {
         //Utils.closeDialog(context);
         if (state is WishListStateError) {
@@ -73,17 +74,6 @@ class _FavoriteButtonState extends State<FavoriteButton> {
           onTap: () async {
             if (isFav) {
               if (wishItem.isNotEmpty) {
-                final r = await context
-                    .read<WishListCubit>()
-                    .removeWishList(wishItem.first);
-                r.fold(
-                  (failure) {
-                    Utils.showSnackBar(context, failure.message);
-                  },
-                  (success) {
-                    Utils.showSnackBar(context, success);
-                  },
-                );
               } else {
                 Utils.showSnackBar(context, Language.somethingWentWrong);
               }

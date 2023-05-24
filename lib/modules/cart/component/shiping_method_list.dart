@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '/modules/cart/model/shipping_response_model.dart';
-import '../../../utils/constants.dart';
 import '../../../utils/utils.dart';
+import '/modules/cart/model/shipping_response_model.dart';
+
+import '../../../utils/constants.dart';
 
 class ShippingMethodList extends StatefulWidget {
   const ShippingMethodList({
@@ -55,15 +55,14 @@ class _ShippingMethodListState extends State<ShippingMethodList> {
                             isSelected ? lightningYellowColor : borderColor)),
                 child: ListTile(
                   onTap: () {
-                    setState(() {
-                      shippingMethodModel = e;
-                      widget.onChange(e.id);
-                    });
+                    shippingMethodModel = e;
+                    widget.onChange(e.id);
+                    setState(() {});
                   },
                   horizontalTitleGap: 0,
                   title:
                       Text("Fee: ${Utils.formatPrice(e.shippingFee, context)}"),
-                  subtitle: Text(Utils.shippingType(e.type)),
+                  subtitle: Text(e.shippingRule),
                 ),
               );
             },

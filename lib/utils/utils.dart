@@ -39,21 +39,6 @@ class Utils {
     return icon + price.toStringAsFixed(1);
   }
 
-  static String shippingType(String type) {
-    switch (type) {
-      case 'base_on_weight':
-        return "Shipping Rule Based on weight";
-      case 'base_on_price':
-        return "Shipping Rule Based on Price";
-      case 'base_on_qty':
-        return "Shipping Rule Based on Qty";
-      default:
-        return "";
-    }
-  }
-
-
-
   static double productPrice(BuildContext context, ProductModel product) {
     final appSetting = context.read<AppSettingCubit>();
     double productPrice = 0.0;
@@ -304,7 +289,7 @@ class Utils {
               InfoLabel(label: Language.name.capitalizeByWord(), text: "ShopO"),
               const SizedBox(height: 6),
               InfoLabel(
-                  label: Language.version.capitalizeByWord(), text: "3.6.0"),
+                  label: Language.version.capitalizeByWord(), text: "3.2.0"),
               const SizedBox(height: 6),
               InfoLabel(
                   label: Language.developedBy.capitalizeByWord(),
@@ -490,7 +475,7 @@ class InfoLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text.rich(TextSpan(
-        text: "${label!} : ",
+        text: label! + " : ",
         style: Theme.of(context).textTheme.bodyMedium,
         children: [
           TextSpan(

@@ -151,8 +151,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                 Utils.errorSnackBar(context, state.message);
               } else if (state is AddressStateUpdated) {
                 Utils.closeDialog(context);
-                Navigator.of(context).pop(true);
-                print('called..');
+                Navigator.of(context).pop();
               }
               // else if (state is AddressStateInvalidDataError) {
               //   context.read<AddressCubit>().getAddress();

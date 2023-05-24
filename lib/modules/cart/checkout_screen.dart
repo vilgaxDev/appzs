@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '/widgets/capitalized_word.dart';
+import '../../utils/language_string.dart';
+import '../animated_splash_screen/controller/app_setting_cubit/app_setting_cubit.dart';
 import '/dummy_data/all_dummy_data.dart';
 import '/modules/cart/controllers/delivery_charges/delivery_charges_cubit.dart';
 import '/modules/profile/controllers/address/address_cubit.dart';
-import '/widgets/capitalized_word.dart';
+
 import '../../core/router_name.dart';
 import '../../utils/constants.dart';
-import '../../utils/language_string.dart';
 import '../../utils/utils.dart';
 import '../../widgets/primary_button.dart';
 import '../../widgets/rounded_app_bar.dart';
-import '../animated_splash_screen/controller/app_setting_cubit/app_setting_cubit.dart';
 import 'component/address_card_component.dart';
 import 'component/checkout_single_item.dart';
 import 'component/shiping_method_list.dart';
@@ -155,7 +155,8 @@ class _LoadedWidgetState extends State<_LoadedWidget> {
                       shippingMethod = id;
                       for (var i in shippingMethodList) {
                         if (i.id == id) {
-                          totalPrice = previousPrice + i.shippingFee;
+                          totalPrice =
+                              previousPrice + i.shippingFee;
                           context
                               .read<DeliveryChargesCubit>()
                               .addDeliveryCharges(totalPrice);
@@ -398,54 +399,20 @@ class _LoadedWidgetState extends State<_LoadedWidget> {
           } else {
             shippingMethodList.clear();
 
-            // shippingMethodList.addAll(checkoutResponseModel!.shippings
-            //     .where((element) =>
-            //         element.cityId == state.address.addresses[index].cityId)
-            //     .toList());
-            //
-            // shippingMethodList.addAll(checkoutResponseModel!.shippings
-            //     .where((element) => element.shippingRule == 'Regular')
-            //     .toList());
-            //
-            // shippingMethodList.addAll(checkoutResponseModel!.shippings
-            //     .where((element) => element.type == basedOnQty)
-            //     .toList());
+            shippingMethodList.addAll(checkoutResponseModel!.shippings
+                .where((element) =>
+                    element.cityId == state.address.addresses[index].cityId)
+                .toList());
 
-            for (var shipping in checkoutResponseModel!.shippings) {
-              if (shipping.type == basedOnPrice) {
-                if (shipping.conditionFrom <= previousPrice &&
-                    shipping.conditionTo >= previousPrice) {
-                  print('addressId $shippingAddressId');
-                  print('shippingId ${shipping.id}');
-                  if (shippingAddressId != shipping.id) {
-                    shippingMethodList.add(shipping);
-                  }
-                }
-              }
+            shippingMethodList.addAll(checkoutResponseModel!.shippings
+                .where((element) => element.shippingRule == 'Regular')
+                .toList());
 
-              if (shipping.type == basedOnWeight) {
-                if (shipping.conditionFrom <= previousPrice &&
-                    shipping.conditionTo >= previousPrice) {
-                  shippingMethodList.add(shipping);
-                  // if (shippingAddressId != shipping.id) {
-                  //   shippingMethodList.add(shipping);
-                  // }
-                }
-              }
-
-              if (shipping.type == basedOnQty) {
-                if (shipping.conditionFrom <= previousPrice &&
-                    shipping.conditionTo >= previousPrice) {
-                  shippingMethodList.add(shipping);
-                }
-              }
-
-              //shippingAddressId = state.address.addresses[index].id;
-              //setState(() {});
-            }
+            shippingMethodList.addAll(checkoutResponseModel!.shippings
+                .where((element) => element.type == basedOnQty)
+                .toList());
 
             shippingAddressId = state.address.addresses[index].id;
-            setState(() {});
           }
           setState(() {});
         },

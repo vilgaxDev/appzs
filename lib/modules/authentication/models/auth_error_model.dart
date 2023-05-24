@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
@@ -62,13 +63,6 @@ class Errors extends Equatable {
   final List<String> message;
   final List<String> review;
 
-  final List<String> openAt;
-  final List<String> closedAt;
-  final List<String> bannerImage;
-  final List<String> logo;
-  final List<String> termCondition;
-  final List<String> shopName;
-
   const Errors({
     required this.name,
     required this.email,
@@ -83,12 +77,6 @@ class Errors extends Equatable {
     required this.subject,
     required this.message,
     required this.review,
-    required this.openAt,
-    required this.closedAt,
-    required this.bannerImage,
-    required this.logo,
-    required this.termCondition,
-    required this.shopName,
   });
 
   Errors copyWith({
@@ -105,12 +93,6 @@ class Errors extends Equatable {
     List<String>? subject,
     List<String>? message,
     List<String>? review,
-    List<String>? openAt,
-    List<String>? closedAt,
-    List<String>? bannerImage,
-    List<String>? logo,
-    List<String>? termCondition,
-    List<String>? shopName,
   }) {
     return Errors(
       name: name ?? this.name,
@@ -126,12 +108,6 @@ class Errors extends Equatable {
       subject: subject ?? this.subject,
       message: message ?? this.message,
       review: review ?? this.review,
-      openAt: openAt ?? this.openAt,
-      closedAt: closedAt ?? this.closedAt,
-      bannerImage: bannerImage ?? this.bannerImage,
-      logo: logo ?? this.logo,
-      termCondition: termCondition ?? this.termCondition,
-      shopName: shopName ?? this.shopName,
     );
   }
 
@@ -150,12 +126,6 @@ class Errors extends Equatable {
       'subject': subject,
       'message': message,
       'review': review,
-      'banner_image': bannerImage,
-      'open_at': openAt,
-      'closed_at': closedAt,
-      'agree_terms_condition': termCondition,
-      'logo': logo,
-      'shop_name': shopName,
     };
   }
 
@@ -200,24 +170,6 @@ class Errors extends Equatable {
       review: map['review'] != null
           ? List<String>.from(map['review'].map((x) => x))
           : [],
-      logo: map['logo'] != null
-          ? List<String>.from(map['logo'].map((x) => x))
-          : [],
-      shopName: map['shop_name'] != null
-          ? List<String>.from(map['shop_name'].map((x) => x))
-          : [],
-      bannerImage: map['banner_image'] != null
-          ? List<String>.from(map['banner_image'].map((x) => x))
-          : [],
-      openAt: map['open_at'] != null
-          ? List<String>.from(map['open_at'].map((x) => x))
-          : [],
-      closedAt: map['closed_at'] != null
-          ? List<String>.from(map['closed_at'].map((x) => x))
-          : [],
-      termCondition: map['agree_terms_condition'] != null
-          ? List<String>.from(map['agree_terms_condition'].map((x) => x))
-          : [],
     );
   }
 
@@ -230,25 +182,6 @@ class Errors extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [
-        name,
-        email,
-        agree,
-        password,
-        phone,
-        country,
-        state,
-        city,
-        address,
-        type,
-        subject,
-        message,
-        review,
-        bannerImage,
-        openAt,
-        closedAt,
-        termCondition,
-        logo,
-        shopName,
-      ];
+  List<Object> get props =>
+      [name, email, agree, password, phone, country, state, city, address, type,subject,message,review];
 }

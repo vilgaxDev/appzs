@@ -193,8 +193,4 @@ class Language {
 
   static String areYouSureYouWantToLogOut =
       myMap['Are_you_sure_you_want_to_Logout'];
-
-  static String becomeSeller = myMap['Become_seller'];
-  static String shopName = myMap['Shop_Name'];
-  static String becomeSellerRequest = myMap['Become_Seller_Request'];
 }

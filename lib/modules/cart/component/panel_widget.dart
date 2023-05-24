@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_o/widgets/capitalized_word.dart';
 
 import '/modules/cart/model/cart_calculation_model.dart';
-import '/widgets/capitalized_word.dart';
 import '../../../core/router_name.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/language_string.dart';
@@ -156,8 +156,7 @@ class _PanelComponentState extends State<PanelComponent> {
               if (state is CartCouponStateLoaded) {
                 widget.cartCalculation!.copyWith(
                   total: (widget.cartCalculation!.total -
-                      double.parse(
-                          state.couponResponseModel.discount.toString())),
+                      double.parse(state.couponResponseModel.discount)),
                 );
 
                 return Text(
@@ -233,7 +232,6 @@ class _PanelComponentState extends State<PanelComponent> {
           if (textController.text.isEmpty) return;
           // Utils.closeKeyBoard(context);
           context.read<CartCubit>().applyCoupon(textController.text.trim());
-          textController.clear();
           setState(() {});
         },
         child: Center(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_o/modules/animated_splash_screen/controller/app_setting_cubit/app_setting_cubit.dart';
+import 'package:shop_o/widgets/capitalized_word.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
-import '/modules/animated_splash_screen/controller/app_setting_cubit/app_setting_cubit.dart';
-import '/modules/cart/model/cart_calculation_model.dart';
-import '/widgets/capitalized_word.dart';
-import '../../utils/constants.dart';
 import '../../utils/language_string.dart';
+import '/modules/cart/model/cart_calculation_model.dart';
+
+import '../../utils/constants.dart';
 import '../../utils/utils.dart';
 import '../../widgets/please_signin_widget.dart';
 import '../../widgets/rounded_app_bar.dart';
@@ -134,8 +134,7 @@ class _LoadedWidgetState extends State<_LoadedWidget> {
 
       if (context.read<CartCubit>().couponResponseModel != null) {
         debugPrint("HE");
-        coupon =
-            context.read<CartCubit>().couponResponseModel!.discount.toString();
+        coupon = context.read<CartCubit>().couponResponseModel!.discount;
         total = total - double.parse(coupon);
       }
 

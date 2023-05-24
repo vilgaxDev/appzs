@@ -106,6 +106,4 @@ class Kimages {
   static const String exitApp = "assets/images/exit.png";
   static const String logout = "assets/images/logout.png";
   static const String deleteIcon = "assets/icons/delete_icon.svg";
-  static const String placeHolderImage = "assets/icons/place_holder_image.svg";
-  static const String becomeSellerIcon = "assets/icons/become_seller_icon.svg";
 }

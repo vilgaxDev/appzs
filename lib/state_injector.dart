@@ -5,7 +5,6 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_o/modules/message/controller/cubit/inbox_cubit.dart';
 import 'package:shop_o/modules/message/controller/repository/chat_respository.dart';
-
 import '/modules/category/controller/cubit/category_cubit.dart';
 import '/modules/category/controller/cubit/cubit/child_cubit.dart';
 import '/modules/category/controller/cubit/cubit/sub_category_cubit.dart';
@@ -16,8 +15,8 @@ import '/modules/home/controller/cubit/products_cubit.dart';
 import '/modules/place_order/controllers/bank/bank_cubit.dart';
 import '/modules/place_order/controllers/razorpay/razorpay_cubit.dart';
 import '/modules/place_order/controllers/stripe/stripe_cubit.dart';
-import 'core/data/datasources/local_data_source.dart';
 import 'core/data/datasources/remote_data_source.dart';
+import 'core/data/datasources/local_data_source.dart';
 import 'core/remote_urls.dart';
 import 'modules/animated_splash_screen/controller/app_setting_cubit/app_setting_cubit.dart';
 import 'modules/animated_splash_screen/controller/repository/app_setting_repository.dart';
@@ -30,14 +29,15 @@ import 'modules/cart/controllers/cart/cart_cubit.dart';
 import 'modules/cart/controllers/cart_repository.dart';
 import 'modules/cart/controllers/checkout/checkout_cubit.dart';
 import 'modules/cart/controllers/delivery_charges/delivery_charges_cubit.dart';
+import 'modules/message/controller/bloc/bloc/chat_bloc.dart';
+import 'modules/place_order/controllers/payment/payment_cubit.dart';
+import 'modules/place_order/controllers/payment_repository.dart';
 import 'modules/home/controller/cubit/home_controller_cubit.dart';
 import 'modules/home/controller/repository/home_repository.dart';
-import 'modules/message/controller/bloc/bloc/chat_bloc.dart';
 import 'modules/order/controllers/order/order_cubit.dart';
 import 'modules/order/controllers/repository/order_repository.dart';
 import 'modules/place_order/controllers/cash_on_payment/cash_on_payment_cubit.dart';
-import 'modules/place_order/controllers/payment/payment_cubit.dart';
-import 'modules/place_order/controllers/payment_repository.dart';
+
 import 'modules/place_order/controllers/paypal/paypal_cubit.dart';
 import 'modules/product_details/controller/cubit/product_details_cubit.dart';
 import 'modules/product_details/controller/repository/product_details_repository.dart';
@@ -49,13 +49,11 @@ import 'modules/profile/controllers/change_password/change_password_cubit.dart';
 import 'modules/profile/controllers/country_state_by_id/country_state_by_id_cubit.dart';
 import 'modules/profile/controllers/delete_user/delete_user_cubit.dart';
 import 'modules/profile/controllers/profile_edit/profile_edit_cubit.dart';
-import 'modules/profile/controllers/repository/profile_repository.dart';
 import 'modules/profile/controllers/updated_info/updated_info_cubit.dart';
 import 'modules/profile/profile_offer/controllers/wish_list/wish_list_cubit.dart';
+import 'modules/profile/controllers/repository/profile_repository.dart';
 import 'modules/search/controllers/search/search_bloc.dart';
 import 'modules/search/controllers/search_repository.dart';
-import 'modules/seller/controller/become_seller_cubit.dart';
-import 'modules/seller/repository/become_seller_repository.dart';
 import 'modules/setting/controllers/about_us_cubit/about_us_cubit.dart';
 import 'modules/setting/controllers/contact_us_cubit/contact_us_cubit.dart';
 import 'modules/setting/controllers/contact_us_form_bloc/contact_us_form_bloc.dart';
@@ -168,11 +166,6 @@ class StateInjector {
     ),
     RepositoryProvider<ChatRepository>(
       create: (context) => ChatRepository(
-        remoteDataSource: context.read(),
-      ),
-    ),
-    RepositoryProvider<BecomeSellerRequestRepository>(
-      create: (context) => BecomeSellerRequestRepositoryImpl(
         remoteDataSource: context.read(),
       ),
     ),
@@ -399,12 +392,6 @@ class StateInjector {
     ),
     BlocProvider<InboxCubit>(
       create: (context) => InboxCubit(),
-    ),
-    BlocProvider<BecomeSellerCubit>(
-      create: (context) => BecomeSellerCubit(
-        sellerRequestRepository: context.read(),
-        loginBloc: context.read(),
-      ),
     ),
   ];
 }

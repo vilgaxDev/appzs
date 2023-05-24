@@ -7,13 +7,12 @@ class CouponResponseModel extends Equatable {
   final int id;
   final String name;
   final String code;
-  final int offerType;
-  final int discount;
-  final int maxQuantity;
-  final int minPurchasePrice;
+  final String offerType;
+  final String discount;
+  final String maxQuantity;
   final String expiredDate;
-  final int applyQty;
-  final int status;
+  final String applyQty;
+  final String status;
   final String createdAt;
   final String updatedAt;
 
@@ -24,7 +23,6 @@ class CouponResponseModel extends Equatable {
     required this.offerType,
     required this.discount,
     required this.maxQuantity,
-    required this.minPurchasePrice,
     required this.expiredDate,
     required this.applyQty,
     required this.status,
@@ -36,13 +34,12 @@ class CouponResponseModel extends Equatable {
     int? id,
     String? name,
     String? code,
-    int? offerType,
-    int? discount,
-    int? maxQuantity,
-    int? minPurchasePrice,
+    String? offerType,
+    String? discount,
+    String? maxQuantity,
     String? expiredDate,
-    int? applyQty,
-    int? status,
+    String? applyQty,
+    String? status,
     String? createdAt,
     String? updatedAt,
   }) {
@@ -53,7 +50,6 @@ class CouponResponseModel extends Equatable {
       offerType: offerType ?? this.offerType,
       discount: discount ?? this.discount,
       maxQuantity: maxQuantity ?? this.maxQuantity,
-      minPurchasePrice: minPurchasePrice ?? this.minPurchasePrice,
       expiredDate: expiredDate ?? this.expiredDate,
       applyQty: applyQty ?? this.applyQty,
       status: status ?? this.status,
@@ -70,7 +66,6 @@ class CouponResponseModel extends Equatable {
       'offer_type': offerType,
       'discount': discount,
       'max_quantity': maxQuantity,
-      'min_purchase_price': minPurchasePrice,
       'expired_date': expiredDate,
       'apply_qty': applyQty,
       'status': status,
@@ -84,21 +79,12 @@ class CouponResponseModel extends Equatable {
       id: map['id'] ?? 0,
       name: map['name'] ?? "",
       code: map['code'] ?? "",
-      offerType: map['offer_type'] != null
-          ? int.parse(map['offer_type'].toString())
-          : 0,
-      discount:
-          map['discount'] != null ? int.parse(map['discount'].toString()) : 0,
-      maxQuantity: map['max_quantity'] != null
-          ? int.parse(map['max_quantity'].toString())
-          : 0,
-      minPurchasePrice: map['min_purchase_price'] != null
-          ? int.parse(map['min_purchase_price'].toString())
-          : 0,
+      offerType: map['offer_type'] ?? "",
+      discount: map['discount'] ?? "",
+      maxQuantity: map['max_quantity'] ?? "",
       expiredDate: map['expired_date'] ?? "",
-      applyQty:
-          map['apply_qty'] != null ? int.parse(map['apply_qty'].toString()) : 0,
-      status: map['status'] != null ? int.parse(map['status'].toString()) : 0,
+      applyQty: map['apply_qty'] ?? "",
+      status: map['status'] ?? "",
       createdAt: map['created_at'] ?? "",
       updatedAt: map['updated_at'] ?? "",
     );
@@ -121,7 +107,6 @@ class CouponResponseModel extends Equatable {
       offerType,
       discount,
       maxQuantity,
-      minPurchasePrice,
       expiredDate,
       applyQty,
       status,

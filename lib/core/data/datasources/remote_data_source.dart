@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:shop_o/modules/message/models/seller_messages_dto.dart';
 
+import '../../../modules/home/model/home_category_model.dart';
 import '/core/data/datasources/network_parser.dart';
 import '/modules/category/model/filter_model.dart';
 import '/modules/category/model/sub_category_model.dart';
@@ -18,7 +19,6 @@ import '../../../modules/cart/model/coupon_response_model.dart';
 import '../../../modules/category/model/child_category_model.dart';
 import '../../../modules/category/model/product_categories_model.dart';
 import '../../../modules/flash/model/flash_model.dart';
-import '../../../modules/home/model/home_category_model.dart';
 import '../../../modules/home/model/home_model.dart';
 import '../../../modules/message/models/send_message_response_dto.dart';
 import '../../../modules/order/model/order_model.dart';
@@ -36,7 +36,6 @@ import '../../../modules/profile/model/user_info/user_updated_info.dart';
 import '../../../modules/profile/model/user_with_country_response.dart';
 import '../../../modules/profile/profile_offer/model/wish_list_model.dart';
 import '../../../modules/search/model/search_response_model.dart';
-import '../../../modules/seller/controller/become_seller_state_model.dart';
 import '../../../modules/seller/seller_model.dart';
 import '../../../modules/setting/model/all_about_model.dart';
 import '../../../modules/setting/model/contact_us_mesage_model.dart';
@@ -144,7 +143,6 @@ abstract class RemoteDataSource {
   Future<String> removeWishList(int id, String token);
 
   Future<String> clearWishList(String token);
-  Future<String> becomeSellerRequest(String token, BecomeSellerStateModel body);
 
   Future<String> addWishList(int id, String token);
 
@@ -1239,36 +1237,5 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     final responseJsonBody =
         await NetworkParser.callClientWithCatchException(() => clientMethod);
     return responseJsonBody['message'];
-  }
-
-  @override
-  Future<String> becomeSellerRequest(
-      String token, BecomeSellerStateModel body) async {
-    final headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    };
-    final uri = Uri.parse(RemoteUrls.becomeSellerRequest(token));
-
-    final request = http.MultipartRequest('POST', uri);
-    request.fields.addAll(body.toMap());
-
-    request.headers.addAll(headers);
-    if (body.bannerImage.isNotEmpty) {
-      final file =
-          await http.MultipartFile.fromPath('banner_image', body.bannerImage);
-      request.files.add(file);
-    }
-    if (body.logo.isNotEmpty) {
-      final file = await http.MultipartFile.fromPath('logo', body.logo);
-      request.files.add(file);
-    }
-
-    http.StreamedResponse response = await request.send();
-    final clientMethod = http.Response.fromStream(response);
-
-    final responseJsonBody =
-        await NetworkParser.callClientWithCatchException(() => clientMethod);
-    return responseJsonBody['notification'] as String;
   }
 }
